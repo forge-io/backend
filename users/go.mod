@@ -1,4 +1,4 @@
-module backend
+module users
 
 go 1.20
 

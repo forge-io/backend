@@ -1,8 +1,8 @@
 package main
 
 import (
-	"backend/internal/server"
 	"fmt"
+	"users/internal/server"
 )
 
 func main() {

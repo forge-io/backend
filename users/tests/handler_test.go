@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"backend/internal/server"
 	"encoding/json"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
+	"users/internal/server"
 )
 
 func TestHandler(t *testing.T) {
