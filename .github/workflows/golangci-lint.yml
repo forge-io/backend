@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         go: [stable]
-        os: ubuntu-latest
+        os: [ubuntu-latest]
         dir: [gateway, users]
     name: lint
     runs-on: ${{ matrix.os }}
