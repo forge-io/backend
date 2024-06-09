@@ -3,6 +3,8 @@
 # Build the application
 all: build
 
+.PHONY: run
+
 build:
 	@echo "Building..."
 	
