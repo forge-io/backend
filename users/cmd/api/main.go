@@ -1,16 +1,21 @@
 package main
 
 import (
-	"fmt"
-	"users/internal/server"
+	"users/cmd/api/config"
+	"users/internal/routes"
+	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	e := echo.New()
 
-	server := server.NewServer()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-	err := server.ListenAndServe()
-	if err != nil {
-		panic(fmt.Sprintf("cannot start server: %s", err))
-	}
+	config.Init()
+
+	routes.Init(e)
+
+	e.Logger.Fatal(e.Start(":8080"))
 }
