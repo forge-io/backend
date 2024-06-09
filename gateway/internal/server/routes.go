@@ -17,8 +17,12 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 	e.GET("/users", echo.WrapHandler(authenticate(proxy("/users", "http://localhost:8081"))))
 
-	e.Start("8080")
+	err := e.Start("8080")
 	fmt.Println("Gateway running on 8080")
+
+	if err != nil {
+		panic(fmt.Sprintf("cannot start server: %s", err))
+	}
 
 	return e
 }
