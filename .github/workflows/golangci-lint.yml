@@ -16,7 +16,7 @@ jobs:
       matrix:
         go: [stable]
         os: [ubuntu-latest]
-        dir: [gateway, users]
+        dir: [gateway, users, authenticate, checkout, lib, products]
     name: lint
     runs-on: ${{ matrix.os }}
     steps:
