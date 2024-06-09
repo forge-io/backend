@@ -1,3 +1,3 @@
-module github.com/forge-io/models
+module github.com/forge-io/backend/lib/models
 
 go 1.22.4

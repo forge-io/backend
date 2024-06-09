@@ -1,8 +1,11 @@
 module users
 
-go 1.20
+go 1.22.4
+
+replace github.com/forge-io/backend/lib/models => ../lib/models
 
 require (
+	github.com/forge-io/backend/lib/models v0.2.0
 	github.com/jackc/pgx/v5 v5.6.0
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
