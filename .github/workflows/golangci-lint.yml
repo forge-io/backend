@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         go: [stable]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: ubuntu-latest
         dir: [Gateway, Users]
     name: lint
     runs-on: ${{ matrix.os }}
@@ -27,4 +27,5 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
+          working-directory: ${{ matrix.dir }}
           version: v1.58
