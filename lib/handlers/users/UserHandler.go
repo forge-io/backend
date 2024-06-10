@@ -22,7 +22,11 @@ func GetDB() *gorm.DB {
 		log.Fatal(err)
 	}
 
-	db.AutoMigrate((&models.User{}))
+	err = db.AutoMigrate(&models.User{})
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return db
 }
