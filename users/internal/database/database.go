@@ -11,6 +11,7 @@ import (
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "github.com/joho/godotenv/autoload"
+	_ "github.com/lib/pq"
 )
 
 // Service represents a service that interacts with a database.
@@ -36,6 +37,32 @@ var (
 	host       = os.Getenv("DB_HOST")
 	dbInstance *service
 )
+const (
+	hostt     = "159.203.175.30"
+	portt     = 5432
+	user     = "root"
+	passwordd = "AQc4wWQnud*6RXz4-Qwvdn*Vs"
+	dbname   = "users"
+)
+
+func ConnectDB() (*sql.DB, error) {
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+			"password=%s dbname=%s sslmode=disable",
+			hostt, portt, user, passwordd, dbname)
+	db, err := sql.Open("postgres", psqlInfo)
+	if err != nil {
+			panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+			panic(err)
+	}
+
+	fmt.Println("Connected to " + dbname)
+
+	return db, nil
+}
 
 func New() Service {
 	// Reuse Connection
