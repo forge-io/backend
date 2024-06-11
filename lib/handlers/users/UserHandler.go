@@ -3,6 +3,7 @@ package handlers
 import (
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/forge-io/backend/lib/models"
 	"github.com/joho/godotenv"
@@ -11,9 +12,15 @@ import (
 )
 
 func GetDB() *gorm.DB {
-	err := godotenv.Load()
+	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
 	if err != nil {
-		log.Fatalf("err loading: %v", err)
+		log.Fatalf("Error finding absolute path: %v", err)
+	}
+
+	// Load the parent .env file
+	err = godotenv.Load(parentEnvPath)
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
 	}
 
 	db, err := gorm.Open(postgres.Open(os.Getenv("USER_DB")))
