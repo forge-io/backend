@@ -12,7 +12,7 @@ build:
 
 # Run the application
 run:
-	@go run main.go
+	@go run main.go daemon
 
 # Create DB container
 docker-run:
