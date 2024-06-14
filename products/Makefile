@@ -3,14 +3,16 @@
 # Build the application
 all: build
 
+.PHONY: run
+
 build:
 	@echo "Building..."
-	
-	@go build -o main cmd/api/main.go
+
+	@go build -o main main.go
 
 # Run the application
 run:
-	@go run cmd/api/main.go
+	@go run main.go daemon
 
 # Create DB container
 docker-run:

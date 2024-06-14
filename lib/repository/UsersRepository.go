@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/forge-io/backend/lib/models"
+import "github.com/forge-io/backend/lib/models/user"
 
 type UserRepository interface {
 	CreateUser(user *models.User) error
