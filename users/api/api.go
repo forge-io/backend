@@ -15,6 +15,9 @@ func MainGroup(e *echo.Echo) {
 func UserGroup(e *echo.Echo) {
 	g := e.Group("/user")
 
-	// user
-	g.GET("/create", services.CreateUser)
+	g.POST("/create", services.CreateUser)
+	g.GET("/getall", services.GetAllUsers)
+	g.GET("/getbyid/:uuid", services.GetUserByUUID)
+	g.PUT("/update/:uuid", services.UpdateUserByUUID)
+	g.DELETE("/delete/:uuid", services.DeleteUser)
 }
