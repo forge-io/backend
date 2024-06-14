@@ -5,7 +5,7 @@ import (
 	"time"
 
 	handlers "github.com/forge-io/backend/lib/handlers/users"
-	"github.com/forge-io/backend/lib/models"
+	"github.com/forge-io/backend/lib/models/user"
 	"github.com/labstack/echo/v4"
 )
 
