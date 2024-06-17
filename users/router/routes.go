@@ -10,7 +10,6 @@ func New() *echo.Echo {
 	e := echo.New()
 
 	api.MainGroup(e)
-	api.UserGroup(e)
 
 	return e
 }

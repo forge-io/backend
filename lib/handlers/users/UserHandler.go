@@ -7,9 +7,26 @@ import (
 
 	"github.com/forge-io/backend/lib/models/user"
 	"github.com/joho/godotenv"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckUserPasswordHash(email string, password string) bool {
+	user, err := GetUserByEmail(email)
+
+	if err != nil {
+		return false
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	return err == nil
+}
 
 func GetDB() *gorm.DB {
 	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
@@ -41,8 +58,19 @@ func GetDB() *gorm.DB {
 func CreateUser(user *models.User) error {
 	db := GetDB()
 
+	uPass := user.Password
+
+	hash, err := HashPassword(uPass)
+
+	if err != nil {
+		log.Fatalf("Error hashing password: %v", err)
+	}
+
+	user.Password = hash
+
 	return db.Create(user).Error
 }
+
 func GetAllUsers() ([]models.User, error) {
 	db := GetDB()
 
@@ -56,6 +84,14 @@ func GetUserByUUID(uuid string) (*models.User, error) {
 
 	var user models.User
 	result := db.First(&user, "id = ?", uuid)
+	return &user, result.Error
+}
+
+func GetUserByEmail(email string) (*models.User, error) {
+	db := GetDB()
+
+	var user models.User
+	result := db.First(&user, "email = ?", email)
 	return &user, result.Error
 }
 

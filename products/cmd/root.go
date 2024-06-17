@@ -3,8 +3,9 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"strconv"
+	"path/filepath"
 	"products/router"
+	"strconv"
 
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog"
@@ -20,17 +21,22 @@ func init() {
 }
 
 func runDaemon(cmd *cobra.Command, args []string) {
-	err := godotenv.Load()
-
+	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
 	if err != nil {
-		log.Fatal().Msg(fmt.Sprintf("err loading: %v", err))
+		log.Fatal().Msgf("Error finding absolute path: %v", err)
+	}
+
+	// Load the parent .env file
+	err = godotenv.Load(parentEnvPath)
+	if err != nil {
+		log.Fatal().Msgf("Error loading .env file: %v", err)
 	}
 
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	log.Info().Msg("Starting the service as daemon")
 
-	port, err := strconv.Atoi(os.Getenv("PORT"))
+	port, err := strconv.Atoi(os.Getenv("PRODUCTS_PORT"))
 	if err != nil {
 		panic(err)
 	}

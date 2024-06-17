@@ -1,7 +1,7 @@
 # Parent Makefile
 
 # List of child directories
-CHILD_DIRS := gateway users
+CHILD_DIRS := gateway users products authenticate
 
 .PHONY: run-all $(CHILD_DIRS)
 

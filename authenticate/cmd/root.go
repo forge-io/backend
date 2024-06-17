@@ -1,11 +1,11 @@
 package cmd
 
 import (
+	"authenticate/router"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
-	"users/router"
 
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog"
@@ -32,17 +32,11 @@ func runDaemon(cmd *cobra.Command, args []string) {
 		log.Fatal().Msgf("Error loading .env file: %v", err)
 	}
 
-	err = godotenv.Load()
-
-	if err != nil {
-		log.Fatal().Msg(fmt.Sprintf("err loading: %v", err))
-	}
-
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	log.Info().Msg("Starting the service as daemon")
 
-	port, err := strconv.Atoi(os.Getenv("USERS_PORT"))
+	port, err := strconv.Atoi(os.Getenv("AUTHENTICATE_PORT"))
 	if err != nil {
 		panic(err)
 	}
