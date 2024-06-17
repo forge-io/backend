@@ -7,12 +7,30 @@ all: build
 
 build:
 	@echo "Building..."
-	
-	@go build -o main cmd/api/main.go
+
+	@go build -o main main.go
 
 # Run the application
 run:
-	@go run cmd/api/main.go
+	@go run main.go daemon
+
+# Create DB container
+docker-run:
+	@if docker compose up 2>/dev/null; then \
+		: ; \
+	else \
+		echo "Falling back to Docker Compose V1"; \
+		docker-compose up; \
+	fi
+
+# Shutdown DB container
+docker-down:
+	@if docker compose down 2>/dev/null; then \
+		: ; \
+	else \
+		echo "Falling back to Docker Compose V1"; \
+		docker-compose down; \
+	fi
 
 # Test the application
 test:
