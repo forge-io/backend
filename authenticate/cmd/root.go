@@ -21,7 +21,7 @@ func init() {
 }
 
 func runDaemon(cmd *cobra.Command, args []string) {
-	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
+	parentEnvPath, err := filepath.Abs(filepath.Join(".", ".env"))
 	if err != nil {
 		log.Fatal().Msgf("Error finding absolute path: %v", err)
 	}

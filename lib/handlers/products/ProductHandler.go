@@ -5,14 +5,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/forge-io/backend/lib/models/product"
+	models "github.com/forge-io/backend/lib/models/product"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func GetDB() *gorm.DB {
-	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
+	parentEnvPath, err := filepath.Abs(filepath.Join(".", ".env"))
 	if err != nil {
 		log.Fatalf("Error finding absolute path: %v", err)
 	}
@@ -76,8 +76,6 @@ func UpdateProduct(uuid string, updatedData *models.Product) error {
 	product.Motor = updatedData.Motor
 	product.Price = updatedData.Price
 	product.Image = updatedData.Image
-
-
 
 	return db.Save(&product).Error
 }

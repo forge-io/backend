@@ -24,7 +24,7 @@ type JwtCustomClaims struct {
 }
 
 func Authenticate(c echo.Context) error {
-	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
+	parentEnvPath, err := filepath.Abs(filepath.Join(".", ".env"))
 	if err != nil {
 		log.Fatalf("Error finding absolute path: %v", err)
 	}

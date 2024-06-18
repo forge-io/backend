@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/forge-io/backend/lib/models/user"
+	models "github.com/forge-io/backend/lib/models/user"
 	"github.com/joho/godotenv"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
@@ -29,7 +29,7 @@ func CheckUserPasswordHash(email string, password string) bool {
 }
 
 func GetDB() *gorm.DB {
-	parentEnvPath, err := filepath.Abs(filepath.Join("..", ".env"))
+	parentEnvPath, err := filepath.Abs(filepath.Join(".", ".env"))
 	if err != nil {
 		log.Fatalf("Error finding absolute path: %v", err)
 	}
