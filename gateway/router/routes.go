@@ -13,6 +13,7 @@ func New() *echo.Echo {
 	api.MainGroup(e)
 	groups.ProductsGroup(e)
 	groups.UserGroup(e)
+	groups.AuthenticateGroup(e)
 
 	return e
 }
