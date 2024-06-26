@@ -11,6 +11,7 @@ func New() *echo.Echo {
 	e := echo.New()
 
 	api.MainGroup(e)
+	groups.ProductsGroup(e)
 	groups.UserGroup(e)
 
 	return e
